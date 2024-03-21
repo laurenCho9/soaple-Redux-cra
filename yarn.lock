@@ -8720,6 +8720,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"just-curry-it@npm:5.3.0":
+  version: 5.3.0
+  resolution: "just-curry-it@npm:5.3.0"
+  checksum: 7a7d2e118c23e47374efa1a388f82d8b698953203408f398cd5333d22ea31aaa7ea7a10022f9475ba76c6068468bbb0476398a069f7129586f44ee51ef28a88f
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -11247,6 +11254,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"reduce-reducers@npm:1.0.4":
+  version: 1.0.4
+  resolution: "reduce-reducers@npm:1.0.4"
+  checksum: 9b3648fa505a3ac7834cd8150ec98f9915e4020c8df0e9a4eddb5d3615814067943913f2582d0be4763ad6583209c0cf7ad3cc1021745b9b8e6ace768d49f6a9
+  languageName: node
+  linkType: hard
+
+"redux-actions@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "redux-actions@npm:3.0.0"
+  dependencies:
+    just-curry-it: 5.3.0
+    reduce-reducers: 1.0.4
+  checksum: 29cbf70f767c26ff8fae7809341fed5d77afc780f4126d26de5a6beed5d8277eb7eed24c1414e806ec0cde604a9bd746963233ad26154da84cfd5b1a7e207f84
+  languageName: node
+  linkType: hard
+
 "redux@npm:^5.0.1":
   version: 5.0.1
   resolution: "redux@npm:5.0.1"
@@ -11943,6 +11967,7 @@ __metadata:
     react-redux: ^9.1.0
     react-scripts: 5.0.1
     redux: ^5.0.1
+    redux-actions: ^3.0.0
     web-vitals: ^2.1.0
   languageName: unknown
   linkType: soft
