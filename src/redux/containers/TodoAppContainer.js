@@ -34,6 +34,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     removeAll: () => {
       dispatch(removeAllActionCreator());
     },
+    triggerAsyncFunction: (asyncFunction) => {
+      dispatch(asyncFunction);
+    },
   };
 }
 
