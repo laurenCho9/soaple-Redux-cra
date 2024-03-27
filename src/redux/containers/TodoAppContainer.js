@@ -14,13 +14,13 @@ import {
   removeTodo as removeTodoActionCreator,
   removeAll as removeAllActionCreator,
 } from "../actions/todoAction";
-
+import { fetchTodosRequested as fetchTodosRequestedActionCreator } from "../actions/fetchTodosAction";
 import addTodoThunkActionCreator from "../thunks/addTodoThunks";
 import TodoApp from "../../components/TodoApp";
 
 function mapStateToProps(state, ownProps) {
   return {
-    todoItems: state.todo,
+    todoItems: [...state.todo, ...state.fetchTodos.data],
   };
 }
 
@@ -38,6 +38,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     triggerAsyncFunction: (asyncFunction) => {
       dispatch(asyncFunction);
+    },
+    fetchTodo: () => {
+      dispatch(fetchTodosRequestedActionCreator());
     },
   };
 }
