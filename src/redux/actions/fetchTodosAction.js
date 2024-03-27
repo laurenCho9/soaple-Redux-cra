@@ -19,7 +19,7 @@ const reducer = handleActions(
       return {
         ...state,
         pending: true,
-        data: [],
+        // data: [],
         error: null,
       };
     },
@@ -27,7 +27,8 @@ const reducer = handleActions(
       return {
         ...state,
         pending: false,
-        data: action.payload.data,
+        // data: action.payload.data,
+        data: state.data.concat(action.payload.data),
       };
     },
     [fetchTodosFailed]: (state, action) => {
