@@ -4,13 +4,36 @@ import { thunk as thunkMiddleware } from "redux-thunk";
 import createSagaMiddleware from "@redux-saga/core";
 import rootSaga from "./sagas";
 // import asyncFunctionMiddleware from "./middlewares/asyncFunctionMiddleware";
-import { persistReducer, persistStore } from "redux-persist";
+import { persistReducer, persistStore, createMigrate } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import sessionStorage from "redux-persist/lib/storage/session";
+
+const migrations = {
+  1: (state) => {
+    return {
+      ...state,
+      fetchTodos: {
+        ...state.fetchTodos,
+        extraData: undefined,
+      },
+    };
+  },
+  2: (state) => {
+    return {
+      ...state,
+      fetchTodos: {
+        ...state.fetchTodos,
+        extraData: null,
+      },
+    };
+  },
+};
 
 const persistConfig = {
   key: "root",
   storage: sessionStorage,
+  version: 2,
+  migrations: createMigrate(migrations, { debug: false }),
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
