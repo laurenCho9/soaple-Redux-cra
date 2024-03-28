@@ -9,11 +9,16 @@ import { connect } from "react-redux";
 //   removeTodoActionCreator,
 //   removeAllActionCreator,
 // } from "../ducks/todoDuck";
+// import {
+//   addTodo as addTodoActionCreator,
+//   removeTodo as removeTodoActionCreator,
+//   removeAll as removeAllActionCreator,
+// } from "../actions/todoAction";
 import {
   addTodo as addTodoActionCreator,
   removeTodo as removeTodoActionCreator,
   removeAll as removeAllActionCreator,
-} from "../actions/todoAction";
+} from "../slices/todoSlice";
 import { fetchTodosRequested as fetchTodosRequestedActionCreator } from "../actions/fetchTodosAction";
 import addTodoThunkActionCreator from "../thunks/addTodoThunks";
 import TodoApp from "../../components/TodoApp";
@@ -27,8 +32,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     addTodo: (text) => {
-      // dispatch(addTodoActionCreator(text));
-      dispatch(addTodoThunkActionCreator(text));
+      dispatch(addTodoActionCreator(text));
+      // dispatch(addTodoThunkActionCreator(text));
     },
     removeTodo: () => {
       dispatch(removeTodoActionCreator());

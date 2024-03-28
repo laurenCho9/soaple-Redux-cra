@@ -1,10 +1,21 @@
-import { applyMiddleware, compose, createStore } from "redux";
+// import { applyMiddleware, compose, createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers";
 import { thunk as thunkMiddleware } from "redux-thunk";
 import createSagaMiddleware from "@redux-saga/core";
 import rootSaga from "./sagas";
 // import asyncFunctionMiddleware from "./middlewares/asyncFunctionMiddleware";
-import { persistReducer, persistStore, createMigrate } from "redux-persist";
+import {
+  persistReducer,
+  persistStore,
+  createMigrate,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import sessionStorage from "redux-persist/lib/storage/session";
 
@@ -38,14 +49,26 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  persistedReducer,
-  composeEnhancers(applyMiddleware(thunkMiddleware, sagaMiddleware))
-);
+// const store = createStore(
+//   persistedReducer,
+//   composeEnhancers(applyMiddleware(thunkMiddleware, sagaMiddleware))
+// );
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => {
+    const defaultMiddleware = getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    });
+    return [...defaultMiddleware, sagaMiddleware];
+  },
+});
 
 sagaMiddleware.run(rootSaga);
 
