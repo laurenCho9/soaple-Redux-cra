@@ -6,10 +6,11 @@ import rootSaga from "./sagas";
 // import asyncFunctionMiddleware from "./middlewares/asyncFunctionMiddleware";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import sessionStorage from "redux-persist/lib/storage/session";
 
 const persistConfig = {
   key: "root",
-  storage: storage,
+  storage: sessionStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
